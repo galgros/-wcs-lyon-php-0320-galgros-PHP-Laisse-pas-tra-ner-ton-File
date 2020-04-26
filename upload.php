@@ -10,7 +10,8 @@ $uploadDir = 'uploads/';
 if (!empty($_FILES)) {
     //foreach files uploaded
     foreach ($_FILES['avatar']['name'] as $key => $value){
-        //get extention
+        //get file name without extention, and get extention
+        $fileName = explode('.', $value);
         $fileType = pathinfo($value, PATHINFO_EXTENSION);
         //error tests
         if ($_FILES['avatar']['error'][$key] == 4)
@@ -23,7 +24,7 @@ if (!empty($_FILES)) {
             $errorsArray['error'] = 'UPLOAD_ERR value: ' . $_FILES['avatar']['error'][$key] . "<br>";
         //if no error
         if (empty($errorsArray)){
-            $uploadFile = $uploadDir . uniqid() . '.' . $fileType;
+            $uploadFile = $uploadDir . uniqid() . $fileName[0] . '.' . $fileType;
             move_uploaded_file($_FILES['avatar']['tmp_name'][$key], $uploadFile);
             //redirection
             header('Location : upload.php');
