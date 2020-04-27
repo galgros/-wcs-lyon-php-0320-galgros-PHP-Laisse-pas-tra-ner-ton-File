@@ -55,9 +55,11 @@ if (!empty($_POST['delete'])){
     <button type="submit">Upload</button>
 </form>
 <!--upload error message-->
-<?php foreach ($errorsArray['error'] as $key => $value): ?>
-<p style="color: red"><?= isset($errorsArray['error'][$key]) ? $errorsArray['error'][$key] : '' ?></p>
-<?php endforeach; ?>
+<?php if (isset($errorsArray['error'])) : ?>
+    <?php foreach ($errorsArray['error'] as $key => $value): ?>
+        <p style="color: red"><?= isset($errorsArray['error'][$key]) ? $errorsArray['error'][$key] : '' ?></p>
+    <?php endforeach; ?>
+<?php endif; ?>
 
 <hr>
 <!--diplay upload with path for each files in folder-->
